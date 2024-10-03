@@ -1,0 +1,54 @@
+<p>child works!</p>
+<!--Template Reference Variable-->
+<input type="text" #mydata>
+<input type="submit" (click)="display(mydata.value)">
+{{myvalue}}
+
+<input type="submit" (click)="display1('Angular')">
+{{myvalue1}}
+
+<h1 *ngIf="check">Hey! I am here!</h1>
+
+<h1 *ngIf="checkcondition then ref1 else ref2"></h1>
+<ng-template #ref1><h1>This is If condition</h1></ng-template>
+<ng-template #ref2><h1>This is Else condition</h1></ng-template>
+
+<h1 *ngIf="checknum%2==0 then refVar1 else refVar2"></h1>
+<ng-template #refVar1><h1>This is Even Number</h1></ng-template>
+<ng-template #refVar2><h1>This is Odd Number</h1></ng-template>
+
+<div [ngSwitch]="color">
+   <div *ngSwitchCase="'red'">Select Red color</div>
+   <div *ngSwitchCase="'green'">Select Green color</div>
+   <div *ngSwitchCase="'blue'">Select Blue color</div>
+   <div *ngSwitchCase="'orange'">Select Orange color</div>
+   <div *ngSwitchDefault="'*'">Select Default</div>
+</div>
+
+<div [ngSwitch]="ope">
+   <div *ngSwitchCase="'+'">{{a+b}}</div>
+   <div *ngSwitchCase="'-'">{{a-b}}</div>
+   <div *ngSwitchCase="'*'">{{a*b}}</div>
+   <div *ngSwitchCase="'/'">{{a/b}}</div>
+</div>
+
+<div *ngFor="let i of arr">
+{{i}}
+</div>
+<!-- 
+<div *ngFor="let i of arr2">
+    <div *ngFor="let i%2==0">
+        {{i}}
+    </div>
+</div>
+
+<div *ngFor="let i of obj1">
+    {{i.id}}-{{i.name}}-{{i.salary}}
+</div>
+
+<div *ngFor="let i of obj1">
+   <div *ngIf="i.salary>2000">
+        {{i.id}}-{{i.name}}-{{i.salary}}
+   </div>
+</div> -->
+

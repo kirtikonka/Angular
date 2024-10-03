@@ -1,0 +1,47 @@
+<p>second works!</p>
+
+<!--Class Binding-->
+<!--Type 1 Single Style Binding-->
+<h2 [style.color]="scolor">Single Style Binding - Method 1 - Using Style</h2>
+<h2 [style.color]="'red'">Single Style Binding - Method 2 - Using Style</h2>
+<br />
+<h2 [class]="sclass">Single Style Binding - Method 3 - Using Class</h2>
+<br />
+<!--Type 2 Multiple Style Binding-->
+<h2 [style]="mcolor">Multiple Style Binding - Method 1 - Using Style</h2>
+<br />
+<h2 [class]="mclass">Multiple Style Binding - Method 2 - Using Class</h2>
+
+<br />
+<!--Funtion in TS-->
+<h2>Using Template Reference Variable</h2>
+<input type="text" #myname />
+<input type="button" value="Click Function 1" (click)="fun(myname.value)" />
+<br />
+<br />
+
+<h2>Changing color of text using Function</h2>
+<input type="color" #name/>
+<input type="submit" value="Click Function 2" (click)="fun1(name.value)" />
+<h3 [style.color]="mydata">Masstech</h3>
+<br />
+
+<!--Calculator-->
+
+<h2>Two Way data binding</h2>
+<h3>Example 1</h3>
+<input type="text" [(ngModel)]="myvalue" placeholder="type here to appear outside"> {{myvalue}}
+<br/><br/>
+<h3>Example 2</h3>
+<input type="color" [(ngModel)]="my" />
+<h3 [style.color]="my">Masstech</h3>
+
+<input type="number" [(ngModel)]="f" />
+<input type="number" [(ngModel)]="s" />
+<select [(ngModel)]="ope" (change)="ope">
+    <option>+</option>
+    <option>-</option>
+    <option>*</option>
+    <option>/</option>
+</select>
+

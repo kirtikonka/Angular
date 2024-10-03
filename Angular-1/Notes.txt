@@ -1,0 +1,558 @@
+
+***************************************************************
+************************Lecture No. 1**************************
+************************And All Notes**************************
+***************************************************************
+
+Installing NodeJS manually:
+node -v
+npm
+
+Angular Installation:
+npm i -g @angular/cli
+ng version
+
+Create Angular Project
+1. In the File Explorer create a Folder of your project
+2. Open Terminal from the Folder
+3. code .
+4. ng new projectname     eg- ng new Angular-1
+5. Select scss for Angular
+
+Run the project
+1. cd .\projectname  eg- cd .\Angular-1
+2. ng serve
+
+Create Child Component(Feature Module)
+ng g c component name    eg- ng g c first
+
+!IMPORTANT 
+In app.component.ts Inside @Component > imports > Enter the Child Component name
+
+app.component files are Parent/Root Components
+app.component.html - root component(Parent Module)
+app.component-spec.ts - can delete if wanted4
+
+package.json - contains all the information
+public - static files can be added
+src - important file
+
+Data Binding
+1. Interpolation
+2. Property/Style Binding
+    a. Single Style
+    b. Multiple Style
+3. Event Binding
+4. Class Binding
+    a. Single 
+    b. Multiple
+5. Conditional Binding (condition?true:false)
+
+Using Functions in Angular
+function fun()
+{ alert("Hello"); }
+
+Banana brackets - [()]
+
+[(ngModel)]
+FormsModule
+
+Events:
+click
+dblclick
+mouseover
+mouseout
+keyup
+keydown
+focus
+blur
+
+Template Reference Variable:
+Syntax:
+<input type="text" #reference>
+
+ngIf: If, If and Else Case
+Syntax:
+If condition
+<element *ngIf="condition"></element>
+
+If else condition
+<element *ngIf="condition then refVar1 else refVar2"></element>
+
+To pass reference in if else, use:
+<ng-template #refVar></ng-template>
+
+ngSwitch: Switch Case
+Syntax:
+[ngSwitch]
+*ngSwitchCase
+*ngSwitchDefault
+
+ngFor: For Loop
+Syntax:
+<element *ngFor="let varname of targetvar"></element>
+
+
+***************************************************************
+*************Video No. 2 - Angular Data Binding****************
+***************************************************************
+ ----------------
+|app.component.ts|
+ ----------------
+
+export class AppComponent {
+
+<!--Child Starts-->
+
+<!--Passing Arrays-->
+name="Itvedant"
+x=[10,20,30,40,50]
+y=['red','green','blue','yellow','black'] 
+col="red"
+
+<!--Passing Objects-->
+emp={
+'name':'Itvedant',
+'id':101,
+'salary':12000
+}
+
+col2="color:green; font-size:30px; text-decoration:underline;";
+	
+x1="x"
+
+pc1=true
+pc2=true
+pc3=true
+mycolors= {
+"c1":this.pc1,
+"c2":this.pc2,
+"c3":!this.pc3    //false(!)
+}
+
+con=true
+
+mytext=""
+
+@NgModule({
+imports:[
+FormsModule
+]
+})
+
+fun() {
+alert("This is a function");
+}
+
+setcolor='';
+redfun()
+{
+this.setcolor="red";
+}
+bluefun()
+{
+this.setcolor="blue";
+}
+
+str="";
+showFun()
+{
+//console.log("This is Console function");
+this.str="This is console";
+}
+
+
+<!--Child2 Starts-->
+
+xvalue="Input Decorator";
+
+yvalue:any;
+
+aevent:any;
+bevent:any;
+
+public checkfn:boolean=true;
+
+}
+ ------------------
+|app.component.html|
+ ------------------
+
+<!--Child Starts-->
+
+<app-child></app-child>
+
+<!--Calling Array-->
+{{"Hello "+ name}}
+{{3+5}}
+{{x[3]}}
+<h1 style="color:{{col}}">Interpolation</h1>
+{{y[2]}}
+
+<!--Calling objects-->
+{{emp.name}}
+{{emp.id}}
+{{emp.salary}}
+
+{{emp.name+emp.id+emp.salary}}
+
+data='';
+display(){
+this.data = "xyz";
+}
+
+<h1 [style.color]="col">Style Binding</h1>
+<h1 [style]="col2">Multiple Style Binding</h1>
+
+<h1 [ngClass]="x1"> Class Binding</h1>
+<h1 [ngClass]="mycolors"> Class Binding</h1>
+
+<h1[style.color]="con?'blue':'red'">Conditional Binding</h1>
+
+<!--Two way data binding-->
+<input type="text" [(ngModel)]="mytext"placeholder="Type here to show outside">
+{{mytext}}
+
+<--Event Binding-->
+<input type="submit" (click)="fun()">
+
+<h1 [style.color]="setcolor">Event Binding</h1>
+<input type="submit" value="Red" (click)="redfun()">
+<input type="submit" value="Blue" (click)="bluefun()">
+
+<br/>,br/>
+<input type="text">
+<input type="submit" (click)="showFun()">
+{{str}}
+
+
+<!--Child2 starts-->
+<app-child2 [inputdata]="xvalue" (cdata)="yvalue=$event" (a)="aevent=$event" (b)="bevent=$event"></app-child2>
+
+<!--Child to Parent-->
+{{yvalue}}
+
+Addition is {{aevent+bevent}}
+
+<!--Pipes starts-->
+<app-pipes></app-pipes>
+
+<!-- gettersetter starts-->
+<app-gettersetter [mydata]="checkfn"></app-gettersetter>
+
+<input type="submit" value="Login" (click)="checkfn=true">
+<input type="submit" value="Logout" (click)="checkfn=false">
+
+ ------------------
+|app.component.scss|
+ ------------------
+
+.x{
+color:aqua;
+}
+.c1{
+color:purple;
+}
+.c2{
+background-color:yellow;
+}
+.c3{
+text-decoration:underline;
+}
+
+***************************************************************
+******************Video No. 3 - Directives*********************
+******************Video No. 4 - Directives*********************
+***************************************************************
+
+ --------------------
+|child.component.html|
+ --------------------
+
+<!--Template Reference Variable-->
+<input type="text" #mydata>
+<input type="submit" (click)="display(mydata.value)">
+{{myvalue}}
+
+<input type="submit" (click)="display1('Angular')">
+{{myvalue1}}
+
+<h1 *ngIf="check">Hey! I am here!</h1>
+
+<h1 *ngIf="checkcondition then ref1 else ref2"></h1>
+<ng-template #ref1><h1>This is If condition</h1></ng-template>
+<ng-template #ref2><h1>This is Else condition</h1></ng-template>
+
+<h1 *ngIf="checknum%2==0 then refVar1 else refVar2"></h1>
+<ng-template #refVar1><h1>This is Even Number</h1></ng-template>
+<ng-template #refVar2><h1>This is Odd Number</h1></ng-template>
+
+<div [ngSwitch]="color">
+   <div *ngSwitchCase="'red'">Select Red color</div>
+   <div *ngSwitchCase="'green'">Select Green color</div>
+   <div *ngSwitchCase="'blue'">Select Blue color</div>
+   <div *ngSwitchCase="'orange'">Select Orange color</div>
+   <div *ngSwitchDefault="'*'">Select Default</div>
+</div>
+
+<div [ngSwitch]="ope">
+   <div *ngSwitchCase="'+'">{{a+b}}</div>
+   <div *ngSwitchCase="'-'">{{a-b}}</div>
+   <div *ngSwitchCase="'*'">{{a*b}}</div>
+   <div *ngSwitchCase="'/'">{{a/b}}</div>
+</div>
+
+<div *ngFor="let i of arr">
+{{i}}
+</div>
+
+<div *ngFor="let i of arr2">
+   <div *ngFor="let i%2==0">{{i}}</div>
+</div>
+
+<div *ngFor="let i of obj1">
+{{i.id}}-{{i.name}}-{{i.salary}}
+</div>
+
+<div *ngFor="let i of obj1">
+   <div *ngIf="i.salary>2000">
+        {{i.id}}-{{i.name}}-{{i.salary}}
+   </div>
+</div>
+
+ ------------------
+|child.component.ts|	
+ ------------------
+export class ChildComponent{
+
+myvalue:string="";
+
+display(x:string)
+{
+this.myvalue=x;
+}
+
+myvalue1:string=""; //string
+//myvalue1=""; //any
+//myvalue1:any; //any
+
+display1(x:string)
+{
+//console.log(x);
+this.myvalue1=x;
+}
+check:boolean=true;
+
+checkcondition:boolean=true;
+
+checknum:number=45;
+
+color:string="red";
+
+a:number=5
+b:number=3
+ope:string="+"
+
+arr=['Red','Green','Blue','Yellow','Panda']
+
+arr2=[1,2,3,4,5,6,7,8,9]
+
+obj1=
+[
+{'id':100,'name':'ABC','salary':1000}, 
+{'id':200,'name':'DEF','salary':2000}, 
+{'id':300,'name':'GHI','salary':3000}, 
+{'id':400,'name':'JKL','salary':4000}
+]
+
+}
+
+***************************************************************
+**********Video No. 5 - Input and Output Decorators************
+***************************************************************
+
+ng g c child2
+
+ -------------------
+|child2.component.ts|	
+ -------------------
+
+import{Component, Input, Output, EventEmitter} from '@angular/core';
+
+export class Child2Component{
+
+@Input('inputdata') x=any;
+
+@Output() cdata==new EventEmitter<string>();
+
+setFun()
+{
+this.cdata.emit("Coming from Input Data");
+}
+
+@Output() a=new EventEmitter<number>();
+@Output() a=new EventEmitter<number>();
+
+add()
+{
+this.a.emit(7);
+this.b.emit(5);
+}
+}
+
+ ---------------------
+|child2.component.html|	
+ ---------------------
+
+Data Coming from Parent to Child is: {{x}}
+
+<input type="submit" (click)="setFun()">
+
+<input type="submit" value="Add" (click)="add()">
+
+***************************************************************
+*************Video No. 6 - Getter, Setter, Pipes***************
+***************************************************************
+
+Pipes 
+Simple functions to use in template expression to accept an input value and return a transformed value
+Pipes are defined with '|'
+
+Types of Pipes
+1. Built-In Pipes
+2. Date Pipes: it formats a date value according to local rules
+3. Lowercase Pipes
+4. Uppercase Pipes
+5. Currency Pipes
+6. Json Pipes
+
+ng g c pipes
+ ------------------
+|pipes.component.ts|	
+ ------------------
+
+export class PipesComponent{
+a="itvedant";
+b="HELLO";
+
+date= new Date();
+
+c=5000;
+
+arr=
+[
+{'name':'ABC','age':10}, 
+{'name':'DEF','age':12},
+{'name':'GHI','age':15},
+{'name':'JKL','age':20}
+]
+
+}
+
+ --------------------
+|pipes.component.html|	
+ --------------------
+
+{{a | uppercase}}
+
+{{b | lowercase}}
+
+{{date}}
+
+{{date | date:"dd-MM-yyyy"}}
+
+{{c | currency:"INR"}} //EUR
+
+{{arr | json | uppercase}}
+
+
+ng g c gettersetter
+ ---------------------------
+|gettersetter.component.html|	
+ ---------------------------
+ -------------------------
+|gettersetter.component.ts|	
+ -------------------------
+
+import{Component, Input} from '@angular/core';
+
+export class GettersetterComponent{
+
+private _mydata:boolean=true;
+public message:string='';
+
+get mydata():boolean
+{ 
+return this._mydata; 
+}
+
+set mydata(val:boolean): 
+{
+this._mydata=val; 
+if(val==true)
+{
+this.message="You logged in";
+}
+else
+{
+this.message="You logged out";
+}
+}
+
+@Input()
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+***************************************************************
+***************************Routing*****************************
+***************************************************************
+
+Routing allows the user to create SPA with multiple views and allows navigation between them.
+Users can switch between the views without loosing the application state and properties. 
+
+Syntax: create new route
+In app.routes.ts
+this array is given: we can create n numbers of routes
+export const routes: Routes = [
+   {
+      Path : 'pathname', component : componentname
+   }
+];
+
+example:
+{
+   Path : 'home', component : 'HomeComponent'
+}
+
+Linking Routes:
+Angular Routing provides 'routerLink' attribute to link the routes
+
+***************************************************************
+**********************Wild Card Routing************************
+***************************************************************
+
+Wild Card Routing allows to handle undefined or unknown routes. 
+The router select this route if the requested url doesnt match any of the path defined.
+The path is defined with **
+Example :
+In app.route.ts
+   {path: '**', component: PageNotFoundComponent}
+
+***************************************************************
+****************************Forms******************************
+***************************************************************
+
+Angular provides 2 main types of Forms
+1. Template Driven Forms
+This form use two way data binding with NgModule 
+By using NgForm we can collect all the information from the given Forms
+
+2. 
+
